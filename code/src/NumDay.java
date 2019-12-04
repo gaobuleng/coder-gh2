@@ -6,28 +6,16 @@ public class NumDay {
 
     public static int days(String s) {
 
-        int len = s.length();
-        char[] c = new char[len];
-        // int[] a = new int[8];
-        int y = 0;
-        int m = 0;
-        int d = 0;
-        int k = 0;
-        for (int i = 0; i < len; i++) {
-            c[i] = s.charAt(i);
+        String[] str = new String[3];
+        int j = 0;
+        for (String retval : s.split("/")) {
+            str[j] = retval;
+            j++;
         }
-        while (c[k] != '/') {
-            y = y * 10 + (int) c[k] - 48;
-            k++;
-        }
-        while (c[k + 1] != '/') {
-            m = m * 10 + (int) c[k + 1] - 48;
-            k++;
-        }
-        for (int i = k + 2; i < len; i++) {
-            d = d * 10 + (int) c[k + 2] - 48;
-            k++;
-        }
+        int y = Integer.parseInt(str[0]);
+        int m = Integer.parseInt(str[1]);
+        int d = Integer.parseInt(str[2]);
+
         if (y % 100 == 0 && y % 400 == 0 || y % 100 != 0 && y % 4 == 0) {        //闰年
             return (numswitch(m, d, 29));
         } else {
