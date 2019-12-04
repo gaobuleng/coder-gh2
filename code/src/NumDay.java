@@ -5,22 +5,28 @@ public class NumDay {
     }
 
     public static int days(String s) {
-        char[] c = new char[10];
-       // int[] a = new int[8];
+
+        int len = s.length();
+        char[] c = new char[len];
+        // int[] a = new int[8];
         int y = 0;
         int m = 0;
         int d = 0;
-        for (int i = 0; i < 10; i++) {
+        int k = 0;
+        for (int i = 0; i < len; i++) {
             c[i] = s.charAt(i);
         }
-        for (int i = 0; i < 4; i++) {
-            y = y * 10 + (int) (c[i])-48;
+        while (c[k] != '/') {
+            y = y * 10 + (int) c[k] - 48;
+            k++;
         }
-        for (int i = 5; i < 7; i++) {
-            m = m * 10 + (int) (c[i])-48;
+        while (c[k + 1] != '/') {
+            m = m * 10 + (int) c[k + 1] - 48;
+            k++;
         }
-        for (int i = 8; i < 10; i++) {
-            d = d * 10 + (int) (c[i])-48;
+        for (int i = k + 2; i < len; i++) {
+            d = d * 10 + (int) c[k + 2] - 48;
+            k++;
         }
         if (y % 100 == 0 && y % 400 == 0 || y % 100 != 0 && y % 4 == 0) {        //闰年
             return (numswitch(m, d, 29));
@@ -45,7 +51,7 @@ public class NumDay {
             //break;
             case 5:
                 return 31 * 2 + 30 + fre + days;
-           // break;
+            // break;
             case 6:
                 return 31 * 3 + 30 + fre + days;
             //break;
